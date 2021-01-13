@@ -53,7 +53,7 @@ public class EnhetstestAdminKontoController {
 
 	}
 	@Test
-	public void hentAlleKonti_loggetInn_Feil(){ // 11 siffer i både PersonNr og KontoNr
+	public void hentAlleKonti_loggetInn_Feil(){
 		// Arrange
 		List<Konto> konti = new ArrayList<>();
 		Konto konto1 = new Konto("1111111111", "01010110523", 10000.50,
@@ -62,7 +62,7 @@ public class EnhetstestAdminKontoController {
 				"Sparekonto", "NOK", null); // Setting transactions to null atm.
 		konti.add(konto1);
 		konti.add(konto2);
-		// mock stuff below - returning mock (fake) values, instead of actually calling the methods.
+		// Mock stuff below - returning mock (fake) values, instead of actually calling the methods.
 		when(sjekk.loggetInn()).thenReturn("01010110523"); // Mock'er sikkerhetskallet, altså ISTEDENFOR å gjøre det metoden skal, returneres heller bare en 'mock' verdi
 		when(adminRepository.hentAlleKonti()).thenReturn(null); // Mock'er sikkerhetskallet, altså ISTEDENFOR å gjøre det metoden skal, returneres heller bare en 'mock' verdi
 		// Act
@@ -159,7 +159,7 @@ public class EnhetstestAdminKontoController {
 	public void slettKonto_LoggetInn_Ok(){
 		// Arrange
 		when(sjekk.loggetInn()).thenReturn("OK");
-		when(adminKontoController.slettKonto("01010110523")).thenReturn("OK"); // Why any(String.class) didn't work I do not know.
+		when(adminKontoController.slettKonto("01010110523")).thenReturn("OK");
 		// Act
 		String resultat = adminKontoController.slettKonto("01010110523");
 		// Assert
@@ -168,9 +168,8 @@ public class EnhetstestAdminKontoController {
 	@Test
 	public void slettKonto_LoggetInn_Feil(){
 		// Arrange
-
 		when(sjekk.loggetInn()).thenReturn("OK");
-		when(adminKontoController.slettKonto("01010110523")).thenReturn(null); // Why any(String.class) didn't work I do not know.
+		when(adminKontoController.slettKonto("01010110523")).thenReturn(null);
 		// Act
 		String resultat = adminKontoController.slettKonto("01010110523");
 		// Assert
