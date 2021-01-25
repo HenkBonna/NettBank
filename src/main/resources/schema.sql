@@ -4,6 +4,14 @@
 -- --------------------------------------------------------
 --
 -- Tabellstruktur for tabell `Konto`
+
+-- ENDRING: Måtte legge til for å få initDB til å fungere.
+DROP TABLE `Konto`IF EXISTS;
+DROP TABLE `Kunde`IF EXISTS;
+DROP TABLE `Poststed`IF EXISTS;
+DROP TABLE `Transaksjon`IF EXISTS;
+-------------------------------------
+
 --
 
 CREATE TABLE IF NOT EXISTS `Konto` (
