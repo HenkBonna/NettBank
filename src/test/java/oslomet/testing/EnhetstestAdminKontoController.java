@@ -11,6 +11,8 @@ import oslomet.testing.Models.Konto;
 import oslomet.testing.Models.Kunde;
 import oslomet.testing.Sikkerhet.Sikkerhet;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -183,5 +185,29 @@ public class EnhetstestAdminKontoController {
 		String resultat = adminKontoController.slettKonto(null);
 		// Assert
 		assertEquals("Ikke innlogget", resultat);
+	}
+
+	@Test
+	public void initDB_OK() {
+		// Arrange
+		when(adminKontoController.initDB()).thenReturn("OK");
+
+		// Act
+		String result = adminRepository.initDB(any(DataSource.class));
+
+		// Assert
+		assertEquals("OK", result);
+	}
+
+	@Test
+	public void initDB_Feil() {
+		// Arrange
+		when(adminKontoController.initDB()).thenReturn("Feil");
+
+		// Act
+		String result = adminRepository.initDB(null);
+
+		// Assert
+		assertEquals("Feil", result);
 	}
 }

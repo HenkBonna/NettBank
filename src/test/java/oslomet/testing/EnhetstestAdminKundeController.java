@@ -13,11 +13,13 @@ import oslomet.testing.DAL.AdminRepository;
 import oslomet.testing.Models.Kunde;
 import oslomet.testing.Sikkerhet.Sikkerhet;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -219,5 +221,29 @@ public class EnhetstestAdminKundeController {
         //assert
         assertEquals("Ikke logget inn", resultat);
 
+    }
+
+    @Test
+    public void initDB_OK() {
+        // Arrange
+        when(adminKundeController.initDB()).thenReturn("OK");
+
+        // Act
+        String result = adminRepository.initDB(any(DataSource.class));
+
+        // Assert
+        assertEquals("OK", result);
+    }
+
+    @Test
+    public void initDB_Feil() {
+        // Arrange
+        when(adminKundeController.initDB()).thenReturn("Feil");
+
+        // Act
+        String result = adminRepository.initDB(null);
+
+        // Assert
+        assertEquals("Feil", result);
     }
 }

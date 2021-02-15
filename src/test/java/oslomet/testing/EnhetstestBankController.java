@@ -12,11 +12,13 @@ import oslomet.testing.Models.Kunde;
 import oslomet.testing.Models.Transaksjon;
 import oslomet.testing.Sikkerhet.Sikkerhet;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -310,6 +312,30 @@ public class EnhetstestBankController {
         String resultat = bankController.endre(enKunde);
 
         assertNull(resultat);
+    }
+
+    @Test
+    public void initDB_OK() {
+        // Arrange
+        when(bankController.initDB()).thenReturn("OK");
+
+        // Act
+        String result = repository.initDB(any(DataSource.class));
+
+        // Assert
+        assertEquals("OK", result);
+    }
+
+    @Test
+    public void initDB_Feil() {
+        // Arrange
+        when(bankController.initDB()).thenReturn("Feil");
+
+        // Act
+        String result = repository.initDB(null);
+
+        // Assert
+        assertEquals("Feil", result);
     }
 }
 

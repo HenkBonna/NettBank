@@ -63,8 +63,6 @@ public class AdminKundeController {
         }
         return "Ikke logget inn";
     }
-
-
 }
 
 
